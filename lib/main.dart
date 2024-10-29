@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lab9/login_view.dart';
-import 'package:lab9/register_view.dart'
+import 'package:lab9/register_view.dart';
 
 void main() {
   runApp(const MyApp());
@@ -36,8 +36,8 @@ class MyApp extends StatelessWidget {
       initialRoute: '/home',
       routes: {
         '/register_view': (BuildContext context) => RegisterView(),
-        '/login_view': (BuildContext context) => LoginView(),
-        '/home': (BuildContext context) => MyHomePage(title: 'Flutter')
+        '/login_view': (BuildContext context) => const LoginView(),
+        '/home': (BuildContext context) => const MyHomePage(title: 'Flutter')
       },
       //home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );

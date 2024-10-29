@@ -1,63 +1,88 @@
-import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
+import 'package:lab9/user.dart';
 
 class RegisterView extends StatefulWidget {
-  RegisterView({Key? key}) : super(key: key);
+  const RegisterView({super.key});
 
   @override
-  _RegisterViewState createState() => _RegisterViewState();
+  RegisterViewState createState() => RegisterViewState();
 }
 
-class _RegisterViewState extends State<RegisterView> {
+class RegisterViewState extends State<RegisterView> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _fieldFirstNameCtr = TextEditingController();
   final TextEditingController _fieldLastNameCtr = TextEditingController();
   final TextEditingController _fieldEmailCtr = TextEditingController();
   final TextEditingController _fieldPhoneCtr = TextEditingController();
+  User user = User();
 
-  void _submitForm() {
+  User? _submitForm() {
     if (_formKey.currentState!.validate()) {
+      showDialog<String>(
+        context: context,
+        builder: (BuildContext context) => AlertDialog(
+          title: const Text('Сообщение'),
+          content: const Text('Вы успешно зарегистрировались'),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () => Navigator.pop(context, 'OK'),
+              child: const Text('OK'),
+            ),
+          ],
+        ),
+      );
       _formKey.currentState!.reset();
-      print(_fieldFirstNameCtr.text);
-      print(_fieldLastNameCtr.text);
-      print(_fieldEmailCtr.text);
-      print(_fieldPhoneCtr.text);
-
-      //print('Submit');
+      user = User(
+          email: _fieldEmailCtr.text,
+          phone: _fieldPhoneCtr.text,
+          firstName: _fieldFirstNameCtr.text,
+          lastName: _fieldLastNameCtr.text);
+      return user;
+    } else {
+      return null;
     }
-  }
-
-  bool _isNumeric(String s) {
-    if (s == null) {
-      return false;
-    }
-    return double.tryParse(s) != null;
   }
 
   String? _validatePhone(value) {
-    if (_isNumeric(value) == false)
+    user.phone = value;
+    if (user.validatePhone() == false) {
       return 'Заполните поле Phone';
-    else
+    } else {
       return null;
+    }
   }
 
   String? _validateEmail(value) {
-    if (EmailValidator.validate(value) == false)
+    user.email = value;
+    if (user.validateEmail() == false) {
       return 'Заполните поле Email';
-    else
+    } else {
       return null;
+    }
   }
-  
-  String? _validateName(value) {
-    if (value == '')
-      return 'Заполните поле Name';
-    else
+
+  String? _validateFirstName(value) {
+    user.firstName = value;
+    if (user.validateFirstName() == false) {
+      return 'Заполните поле First Name';
+    } else {
       return null;
+    }
+  }
+
+  String? _validateLastName(value) {
+    user.lastName = value;
+    if (user.validateLastName() == false) {
+      return 'Заполните поле Last Name';
+    } else {
+      return null;
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        resizeToAvoidBottomInset: false,
         appBar: AppBar(),
         body: Form(
           key: _formKey,
@@ -66,12 +91,12 @@ class _RegisterViewState extends State<RegisterView> {
               TextFormField(
                 controller: _fieldFirstNameCtr,
                 decoration: const InputDecoration(labelText: 'First Name'),
-                validator: _validateName,
+                validator: _validateFirstName,
               ),
               TextFormField(
                 controller: _fieldLastNameCtr,
                 decoration: const InputDecoration(labelText: 'Last Name'),
-                validator: _validateName,
+                validator: _validateLastName,
               ),
               TextFormField(
                 controller: _fieldEmailCtr,
@@ -83,15 +108,14 @@ class _RegisterViewState extends State<RegisterView> {
                 decoration: const InputDecoration(labelText: 'Phone'),
                 validator: _validatePhone,
               ),
-              TextButton(onPressed: _submitForm, child: const Text('Отправить')),
-
+              TextButton(
+                  onPressed: _submitForm, child: const Text('Зарегистрироваться')),
               TextButton(
                 child: const Text('Назад'),
                 onPressed: () {
                   Navigator.pushNamed(context, '/home');
                 },
               ),
-
             ],
           ),
         ));

@@ -1,52 +1,64 @@
-import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
+import 'package:lab9/user.dart';
 
 class LoginView extends StatefulWidget {
-  LoginView({Key? key}) : super(key: key);
+  const LoginView({super.key});
 
   @override
-  _LoginViewState createState() => _LoginViewState();
+  LoginViewState createState() => LoginViewState();
 }
 
-class _LoginViewState extends State<LoginView> {
+class LoginViewState extends State<LoginView> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _fieldEmailCtr = TextEditingController();
   final TextEditingController _fieldPhoneCtr = TextEditingController();
+  User user = User();
 
-  void _submitForm() {
+  User? _submitForm() {
     if (_formKey.currentState!.validate()) {
+      showDialog<String>(
+        context: context,
+        builder: (BuildContext context) => AlertDialog(
+          title: const Text('Сообщение'),
+          content: const Text('Добро пожаловать'),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () => Navigator.pop(context, 'OK'),
+              child: const Text('OK'),
+            ),
+          ],
+        ),
+      );
       _formKey.currentState!.reset();
-      print(_fieldEmailCtr.text);
-      print(_fieldPhoneCtr.text);
-
-      //print('Submit');
+      user = User(email: _fieldEmailCtr.text, phone: _fieldPhoneCtr.text);
+      return user;
+    } else {
+      return null;
     }
-  }
-
-  bool _isNumeric(String s) {
-    if (s == null) {
-      return false;
-    }
-    return double.tryParse(s) != null;
   }
 
   String? _validatePhone(value) {
-    if (_isNumeric(value) == false)
+    user.phone = value;
+    if (user.validatePhone() == false) {
       return 'Заполните поле Phone';
-    else
+    } else {
       return null;
+    }
   }
 
   String? _validateEmail(value) {
-    if (EmailValidator.validate(value) == false)
+    user.email = value;
+    if (user.validateEmail() == false) {
       return 'Заполните поле Email';
-    else
+    } else {
       return null;
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        resizeToAvoidBottomInset: false,
         appBar: AppBar(),
         body: Form(
           key: _formKey,
@@ -62,8 +74,7 @@ class _LoginViewState extends State<LoginView> {
                 decoration: const InputDecoration(labelText: 'Phone'),
                 validator: _validatePhone,
               ),
-              TextButton(onPressed: _submitForm, child: const Text('Отправить')),
-
+              TextButton(onPressed: _submitForm, child: const Text('Войти')),
               TextButton(
                 child: const Text('Назад'),
                 onPressed: () {
