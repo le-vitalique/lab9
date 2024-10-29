@@ -12,15 +12,17 @@ void main() {
     test(
       'should return true when called validateEmail with valid email',
       () {
-        bool isValid = user.validateEmail();
-        expect(isValid, true);
+        bool isEmpty = user.emailIsEmpty();
+        bool isValid = user.emailIsValid();
+        expect(!isEmpty && isValid, true);
       },
     );
     test(
       'should return true when called validatePhone with valid phone',
       () {
-        bool isValid = user.validatePhone();
-        expect(isValid, true);
+        bool isEmpty = user.phoneIsEmpty();
+        bool isValid = user.phoneIsValid();
+        expect(!isEmpty && isValid, true);
       },
     );
     test('should true when called validateFirstName with non empty first name',

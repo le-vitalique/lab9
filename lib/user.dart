@@ -23,18 +23,31 @@ class User {
     );
   }
 
-  bool validateEmail() {
-    if (email == null || EmailValidator.validate(email.toString()) == false) {
+  bool emailIsEmpty() {
+    if (email == null || email.toString().isEmpty) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  bool emailIsValid() {
+    if (EmailValidator.validate(email.toString()) == false) {
       return false;
     } else {
       return true;
     }
   }
 
-  bool validatePhone() {
-    if (phone == null) {
+  bool phoneIsEmpty() {
+    if (phone == null || phone.toString().isEmpty) {
+      return true;
+    } else {
       return false;
     }
+  }
+
+  bool phoneIsValid() {
     return double.tryParse(phone.toString()) != null;
   }
 

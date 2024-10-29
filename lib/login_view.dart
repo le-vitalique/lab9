@@ -27,8 +27,10 @@ class LoginViewState extends State<LoginView> {
 
   String? _validatePhone(value) {
     user.phone = value;
-    if (user.validatePhone() == false) {
+    if (user.phoneIsEmpty()) {
       return 'Заполните поле Phone';
+    } else if (!user.phoneIsValid()) {
+      return 'Введите корректное значение';
     } else {
       return null;
     }
@@ -36,8 +38,10 @@ class LoginViewState extends State<LoginView> {
 
   String? _validateEmail(value) {
     user.email = value;
-    if (user.validateEmail() == false) {
+    if (user.emailIsEmpty()) {
       return 'Заполните поле Email';
+    } else if (!user.emailIsValid()) {
+      return 'Введите корректное значение';
     } else {
       return null;
     }
