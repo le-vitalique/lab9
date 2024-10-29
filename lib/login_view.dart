@@ -74,7 +74,10 @@ class LoginViewState extends State<LoginView> {
                 decoration: const InputDecoration(labelText: 'Phone'),
                 validator: _validatePhone,
               ),
-              TextButton(onPressed: _submitForm, child: const Text('Войти')),
+              TextButton(
+                onPressed: _submitForm,
+                child: const Text('Войти'),
+              ),
               TextButton(
                 child: const Text('Назад'),
                 onPressed: () {

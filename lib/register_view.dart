@@ -109,7 +109,9 @@ class RegisterViewState extends State<RegisterView> {
                 validator: _validatePhone,
               ),
               TextButton(
-                  onPressed: _submitForm, child: const Text('Зарегистрироваться')),
+                onPressed: _submitForm,
+                child: const Text('Зарегистрироваться'),
+              ),
               TextButton(
                 child: const Text('Назад'),
                 onPressed: () {
