@@ -16,19 +16,20 @@ class LoginViewState extends State<LoginView> {
 
   User? _submitForm() {
     if (_formKey.currentState!.validate()) {
-      showDialog<String>(
-        context: context,
-        builder: (BuildContext context) => AlertDialog(
-          title: const Text('Сообщение'),
-          content: const Text('Добро пожаловать'),
-          actions: <Widget>[
-            TextButton(
-              onPressed: () => Navigator.pop(context, 'OK'),
-              child: const Text('OK'),
-            ),
-          ],
-        ),
-      );
+      // showDialog<String>(
+      //   context: context,
+      //   builder: (BuildContext context) => AlertDialog(
+      //     title: const Text('Успешно'),
+      //     content: const Text('Добро пожаловать'),
+      //     actions: <Widget>[
+      //       TextButton(
+      //         onPressed: () => Navigator.pop(context),
+      //         child: const Text('OK'),
+      //       ),
+      //     ],
+      //   ),
+      // );
+      Navigator.pushNamed(context, '/login_success');
       _formKey.currentState!.reset();
       user = User(email: _fieldEmailCtr.text, phone: _fieldPhoneCtr.text);
       return user;
@@ -56,36 +57,44 @@ class LoginViewState extends State<LoginView> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+    _fieldPhoneCtr.dispose();
+    _fieldEmailCtr.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-        resizeToAvoidBottomInset: false,
-        appBar: AppBar(),
-        body: Form(
-          key: _formKey,
-          child: Column(
-            children: <Widget>[
-              TextFormField(
-                controller: _fieldEmailCtr,
-                decoration: const InputDecoration(labelText: 'Email'),
-                validator: _validateEmail,
-              ),
-              TextFormField(
-                controller: _fieldPhoneCtr,
-                decoration: const InputDecoration(labelText: 'Phone'),
-                validator: _validatePhone,
-              ),
-              TextButton(
-                onPressed: _submitForm,
-                child: const Text('Войти'),
-              ),
-              TextButton(
-                child: const Text('Назад'),
-                onPressed: () {
-                  Navigator.pushNamed(context, '/home');
-                },
-              ),
-            ],
-          ),
-        ));
+      resizeToAvoidBottomInset: false,
+      appBar: AppBar(),
+      body: Form(
+        key: _formKey,
+        child: Column(
+          children: <Widget>[
+            TextFormField(
+              controller: _fieldEmailCtr,
+              decoration: const InputDecoration(labelText: 'Email'),
+              validator: _validateEmail,
+            ),
+            TextFormField(
+              controller: _fieldPhoneCtr,
+              decoration: const InputDecoration(labelText: 'Phone'),
+              validator: _validatePhone,
+            ),
+            TextButton(
+              onPressed: _submitForm,
+              child: const Text('Войти'),
+            ),
+            TextButton(
+              child: const Text('Назад'),
+              onPressed: () {
+                Navigator.pushNamed(context, '/home');
+              },
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }

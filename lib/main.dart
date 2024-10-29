@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lab9/login_view.dart';
 import 'package:lab9/register_view.dart';
+import 'package:lab9/success.dart';
 
 void main() {
   runApp(const MyApp());
@@ -35,9 +36,11 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: '/home',
       routes: {
-        '/register_view': (BuildContext context) => RegisterView(),
+        '/register_view': (BuildContext context) => const RegisterView(),
         '/login_view': (BuildContext context) => const LoginView(),
-        '/home': (BuildContext context) => const MyHomePage(title: 'Flutter')
+        '/home': (BuildContext context) => const MyHomePage(title: 'Flutter'),
+        '/login_success': (BuildContext context) => const Success(title: 'Добро пожаловать'),
+        '/register_success': (BuildContext context) => const Success(title: 'Вы успешно зарегистрировались'),
       },
       //home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
@@ -63,8 +66,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
-
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done

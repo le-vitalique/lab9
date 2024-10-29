@@ -18,19 +18,20 @@ class RegisterViewState extends State<RegisterView> {
 
   User? _submitForm() {
     if (_formKey.currentState!.validate()) {
-      showDialog<String>(
-        context: context,
-        builder: (BuildContext context) => AlertDialog(
-          title: const Text('Сообщение'),
-          content: const Text('Вы успешно зарегистрировались'),
-          actions: <Widget>[
-            TextButton(
-              onPressed: () => Navigator.pop(context, 'OK'),
-              child: const Text('OK'),
-            ),
-          ],
-        ),
-      );
+      // showDialog<String>(
+      //   context: context,
+      //   builder: (BuildContext context) => AlertDialog(
+      //     title: const Text('Успешно'),
+      //     content: const Text('Вы успешно зарегистрировались'),
+      //     actions: <Widget>[
+      //       TextButton(
+      //         onPressed: () => Navigator.pop(context),
+      //         child: const Text('OK'),
+      //       ),
+      //     ],
+      //   ),
+      // );
+      Navigator.pushNamed(context, '/register_success');
       _formKey.currentState!.reset();
       user = User(
           email: _fieldEmailCtr.text,
@@ -80,46 +81,56 @@ class RegisterViewState extends State<RegisterView> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+    _fieldEmailCtr.dispose();
+    _fieldPhoneCtr.dispose();
+    _fieldFirstNameCtr.dispose();
+    _fieldLastNameCtr.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-        resizeToAvoidBottomInset: false,
-        appBar: AppBar(),
-        body: Form(
-          key: _formKey,
-          child: Column(
-            children: <Widget>[
-              TextFormField(
-                controller: _fieldFirstNameCtr,
-                decoration: const InputDecoration(labelText: 'First Name'),
-                validator: _validateFirstName,
-              ),
-              TextFormField(
-                controller: _fieldLastNameCtr,
-                decoration: const InputDecoration(labelText: 'Last Name'),
-                validator: _validateLastName,
-              ),
-              TextFormField(
-                controller: _fieldEmailCtr,
-                decoration: const InputDecoration(labelText: 'Email'),
-                validator: _validateEmail,
-              ),
-              TextFormField(
-                controller: _fieldPhoneCtr,
-                decoration: const InputDecoration(labelText: 'Phone'),
-                validator: _validatePhone,
-              ),
-              TextButton(
-                onPressed: _submitForm,
-                child: const Text('Зарегистрироваться'),
-              ),
-              TextButton(
-                child: const Text('Назад'),
-                onPressed: () {
-                  Navigator.pushNamed(context, '/home');
-                },
-              ),
-            ],
-          ),
-        ));
+      resizeToAvoidBottomInset: false,
+      appBar: AppBar(),
+      body: Form(
+        key: _formKey,
+        child: Column(
+          children: <Widget>[
+            TextFormField(
+              controller: _fieldFirstNameCtr,
+              decoration: const InputDecoration(labelText: 'First Name'),
+              validator: _validateFirstName,
+            ),
+            TextFormField(
+              controller: _fieldLastNameCtr,
+              decoration: const InputDecoration(labelText: 'Last Name'),
+              validator: _validateLastName,
+            ),
+            TextFormField(
+              controller: _fieldEmailCtr,
+              decoration: const InputDecoration(labelText: 'Email'),
+              validator: _validateEmail,
+            ),
+            TextFormField(
+              controller: _fieldPhoneCtr,
+              decoration: const InputDecoration(labelText: 'Phone'),
+              validator: _validatePhone,
+            ),
+            TextButton(
+              onPressed: _submitForm,
+              child: const Text('Зарегистрироваться'),
+            ),
+            TextButton(
+              child: const Text('Назад'),
+              onPressed: () {
+                Navigator.pushNamed(context, '/home');
+              },
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
