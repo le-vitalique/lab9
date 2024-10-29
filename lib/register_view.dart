@@ -10,14 +10,16 @@ class RegisterView extends StatefulWidget {
 
 class _RegisterViewState extends State<RegisterView> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final TextEditingController _fieldNameCtr = TextEditingController();
+  final TextEditingController _fieldFirstNameCtr = TextEditingController();
+  final TextEditingController _fieldLastNameCtr = TextEditingController();
   final TextEditingController _fieldEmailCtr = TextEditingController();
   final TextEditingController _fieldPhoneCtr = TextEditingController();
 
   void _submitForm() {
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.reset();
-      print(_fieldNameCtr.text);
+      print(_fieldFirstNameCtr.text);
+      print(_fieldLastNameCtr.text);
       print(_fieldEmailCtr.text);
       print(_fieldPhoneCtr.text);
 
@@ -45,6 +47,13 @@ class _RegisterViewState extends State<RegisterView> {
     else
       return null;
   }
+  
+  String? _validateName(value) {
+    if (value == '')
+      return 'Заполните поле Name';
+    else
+      return null;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,14 +64,14 @@ class _RegisterViewState extends State<RegisterView> {
           child: Column(
             children: <Widget>[
               TextFormField(
-                controller: _fieldNameCtr,
-                decoration: const InputDecoration(labelText: 'Name'),
-                validator: (value) {
-                  if (value == '')
-                    return 'Заполните поле Name';
-                  else
-                    return null;
-                },
+                controller: _fieldFirstNameCtr,
+                decoration: const InputDecoration(labelText: 'First Name'),
+                validator: _validateName,
+              ),
+              TextFormField(
+                controller: _fieldLastNameCtr,
+                decoration: const InputDecoration(labelText: 'Last Name'),
+                validator: _validateName,
               ),
               TextFormField(
                 controller: _fieldEmailCtr,
