@@ -25,12 +25,12 @@ void main() {
         expect(!isEmpty && isValid, true);
       },
     );
-    test('should true when called validateFirstName with non empty first name',
+    test('should return true when called validateFirstName with non empty first name',
         () {
       bool isValid = user.validateFirstName();
       expect(isValid, true);
     });
-    test('should true when called validateLastName with non empty last name',
+    test('should return true when called validateLastName with non empty last name',
         () {
       bool isValid = user.validateLastName();
       expect(isValid, true);
