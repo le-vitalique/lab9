@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lab9/login_view.dart';
+import 'package:lab9/register_view.dart'
 
 void main() {
   runApp(const MyApp());
@@ -34,8 +35,8 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: '/home',
       routes: {
-        '/register': (BuildContext context) => RegisterView(),
-        '/login': (BuildContext context) => LoginView(),
+        '/register_view': (BuildContext context) => RegisterView(),
+        '/login_view': (BuildContext context) => LoginView(),
         '/home': (BuildContext context) => MyHomePage(title: 'Flutter')
       },
       //home: const MyHomePage(title: 'Flutter Demo Home Page'),
@@ -104,13 +105,13 @@ class _MyHomePageState extends State<MyHomePage> {
             TextButton(
               child: const Text('Вход'),
               onPressed: () {
-                Navigator.pushNamed(context, '/login');
+                Navigator.pushNamed(context, '/login_view');
               },
             ),
             TextButton(
               child: const Text('Регистрация'),
               onPressed: () {
-                Navigator.pushNamed(context, '/register');
+                Navigator.pushNamed(context, '/register_view');
               },
             ),
           ],
