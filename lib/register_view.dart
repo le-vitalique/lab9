@@ -18,19 +18,6 @@ class RegisterViewState extends State<RegisterView> {
 
   User? _submitForm() {
     if (_formKey.currentState!.validate()) {
-      // showDialog<String>(
-      //   context: context,
-      //   builder: (BuildContext context) => AlertDialog(
-      //     title: const Text('Успешно'),
-      //     content: const Text('Вы успешно зарегистрировались'),
-      //     actions: <Widget>[
-      //       TextButton(
-      //         onPressed: () => Navigator.pop(context),
-      //         child: const Text('OK'),
-      //       ),
-      //     ],
-      //   ),
-      // );
       Navigator.pushNamed(context, '/register_success');
       _formKey.currentState!.reset();
       user = User(
@@ -99,26 +86,31 @@ class RegisterViewState extends State<RegisterView> {
         child: Column(
           children: <Widget>[
             TextFormField(
+              key: const Key('firstName'),
               controller: _fieldFirstNameCtr,
               decoration: const InputDecoration(labelText: 'First Name'),
               validator: _validateFirstName,
             ),
             TextFormField(
+              key: const Key('lastName'),
               controller: _fieldLastNameCtr,
               decoration: const InputDecoration(labelText: 'Last Name'),
               validator: _validateLastName,
             ),
             TextFormField(
+              key: const Key('email'),
               controller: _fieldEmailCtr,
               decoration: const InputDecoration(labelText: 'Email'),
               validator: _validateEmail,
             ),
             TextFormField(
+              key: const Key('phone'),
               controller: _fieldPhoneCtr,
               decoration: const InputDecoration(labelText: 'Phone'),
               validator: _validatePhone,
             ),
             TextButton(
+              key: const Key('submit'),
               onPressed: _submitForm,
               child: const Text('Зарегистрироваться'),
             ),

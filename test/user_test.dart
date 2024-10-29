@@ -5,8 +5,8 @@ void main() {
   final User user = User(
     email: 'user@gmail.com',
     phone: '79296661234',
-    firstName: 'Jack',
-    lastName: 'White',
+    firstName: 'Иван',
+    lastName: 'Иванов',
   );
   group('testing user email and phone', () {
     test(

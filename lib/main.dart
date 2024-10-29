@@ -104,12 +104,14 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             TextButton(
+              key: const Key('login'),
               child: const Text('Вход'),
               onPressed: () {
                 Navigator.pushNamed(context, '/login_view');
               },
             ),
             TextButton(
+              key: const Key('register'),
               child: const Text('Регистрация'),
               onPressed: () {
                 Navigator.pushNamed(context, '/register_view');

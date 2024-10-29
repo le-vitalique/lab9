@@ -16,19 +16,6 @@ class LoginViewState extends State<LoginView> {
 
   User? _submitForm() {
     if (_formKey.currentState!.validate()) {
-      // showDialog<String>(
-      //   context: context,
-      //   builder: (BuildContext context) => AlertDialog(
-      //     title: const Text('Успешно'),
-      //     content: const Text('Добро пожаловать'),
-      //     actions: <Widget>[
-      //       TextButton(
-      //         onPressed: () => Navigator.pop(context),
-      //         child: const Text('OK'),
-      //       ),
-      //     ],
-      //   ),
-      // );
       Navigator.pushNamed(context, '/login_success');
       _formKey.currentState!.reset();
       user = User(email: _fieldEmailCtr.text, phone: _fieldPhoneCtr.text);
@@ -73,16 +60,19 @@ class LoginViewState extends State<LoginView> {
         child: Column(
           children: <Widget>[
             TextFormField(
+              key: const Key('email'),
               controller: _fieldEmailCtr,
               decoration: const InputDecoration(labelText: 'Email'),
               validator: _validateEmail,
             ),
             TextFormField(
+              key: const Key('phone'),
               controller: _fieldPhoneCtr,
               decoration: const InputDecoration(labelText: 'Phone'),
               validator: _validatePhone,
             ),
             TextButton(
+              key: const Key('submit'),
               onPressed: _submitForm,
               child: const Text('Войти'),
             ),
