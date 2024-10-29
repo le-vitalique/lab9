@@ -10,14 +10,12 @@ class LoginView extends StatefulWidget {
 
 class _LoginViewState extends State<LoginView> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final TextEditingController _fieldNameCtr = TextEditingController();
   final TextEditingController _fieldEmailCtr = TextEditingController();
   final TextEditingController _fieldPhoneCtr = TextEditingController();
 
   void _submitForm() {
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.reset();
-      print(_fieldNameCtr.text);
       print(_fieldEmailCtr.text);
       print(_fieldPhoneCtr.text);
 
@@ -55,16 +53,6 @@ class _LoginViewState extends State<LoginView> {
           child: Column(
             children: <Widget>[
               TextFormField(
-                controller: _fieldNameCtr,
-                decoration: const InputDecoration(labelText: 'Name'),
-                validator: (value) {
-                  if (value == '')
-                    return 'Заполните поле Name';
-                  else
-                    return null;
-                },
-              ),
-              TextFormField(
                 controller: _fieldEmailCtr,
                 decoration: const InputDecoration(labelText: 'Email'),
                 validator: _validateEmail,
@@ -82,7 +70,6 @@ class _LoginViewState extends State<LoginView> {
                   Navigator.pushNamed(context, '/home');
                 },
               ),
-
             ],
           ),
         ));
