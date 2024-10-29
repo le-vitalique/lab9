@@ -10,7 +10,7 @@ void main() {
   );
   group('testing user email and phone', () {
     test(
-      'should return true when called validateEmail with valid email',
+      'should return true if email is not empty and valid',
       () {
         bool isEmpty = user.emailIsEmpty();
         bool isValid = user.emailIsValid();
@@ -18,7 +18,7 @@ void main() {
       },
     );
     test(
-      'should return true when called validatePhone with valid phone',
+      'should return true if phone is not empty and valid',
       () {
         bool isEmpty = user.phoneIsEmpty();
         bool isValid = user.phoneIsValid();
