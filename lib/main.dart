@@ -32,8 +32,9 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      initialRoute: '/login',
+      initialRoute: '/home',
       routes: {
+        '/register': (BuildContext context) => RegisterView(),
         '/login': (BuildContext context) => LoginView(),
         '/home': (BuildContext context) => MyHomePage(title: 'Flutter')
       },
@@ -122,6 +123,12 @@ class _MyHomePageState extends State<MyHomePage> {
               child: const Text('Вход'),
               onPressed: () {
                 Navigator.pushNamed(context, '/login');
+              },
+            ),
+            TextButton(
+              child: const Text('Регистрация'),
+              onPressed: () {
+                Navigator.pushNamed(context, '/register');
               },
             ),
           ],
