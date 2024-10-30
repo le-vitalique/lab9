@@ -83,7 +83,7 @@ class LoginViewState extends State<LoginView> {
             TextButton(
               child: const Text('Назад'),
               onPressed: () {
-                Navigator.pushNamed(context, '/home');
+                Navigator.pop(context);
               },
             ),
           ],
