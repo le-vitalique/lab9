@@ -121,7 +121,7 @@ class RegisterViewState extends State<RegisterView> {
             TextButton(
               child: const Text('Назад'),
               onPressed: () {
-                Navigator.pushNamed(context, '/home');
+                Navigator.pop(context);
               },
             ),
           ],
