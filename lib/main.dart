@@ -36,11 +36,13 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: '/',
       routes: {
-        '/': (BuildContext context) => const MyHomePage(title: 'Flutter'),
+        '/': (BuildContext context) => const MyHomePage(title: 'lab 9'),
         '/login_view': (BuildContext context) => const LoginView(),
         '/register_view': (BuildContext context) => const RegisterView(),
-        '/login_success': (BuildContext context) => const Success(title: 'Добро пожаловать'),
-        '/register_success': (BuildContext context) => const Success(title: 'Вы успешно зарегистрировались'),
+        '/login_success': (BuildContext context) =>
+            const Success(title: 'Добро пожаловать'),
+        '/register_success': (BuildContext context) =>
+            const Success(title: 'Вы успешно зарегистрировались'),
       },
       //home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
@@ -83,6 +85,7 @@ class _MyHomePageState extends State<MyHomePage> {
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
+        centerTitle: true,
       ),
       body: Center(
         // Center is a layout widget. It takes a single child and positions it
